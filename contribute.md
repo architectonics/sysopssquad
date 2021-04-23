@@ -16,6 +16,9 @@ Give it a few minutes to download a few dependencies, then run:
 
 in order to build and start the documentation in the dev webserver, which should now be running at:  http://localhost:3000
 
+## VS Code Extensions
+There are a number of VS Code Extensions recommended in the [extensions.json](.vscode/extensions.json) file.  Feel free to install them yourself, or re-launch VS Code in this folder, and you should get prompted to install these extensions.  
+
 ## Contributions
 
 Please create a github fork of the repository, and submit any pull requests.  Because the images are just text files, using traditional git workflows works great for both major refactoring and minor enhancements to the images.
