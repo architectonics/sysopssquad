@@ -1,0 +1,24 @@
+{
+  "name": "sysopssquad",
+  "version": "1.0.0",
+  "description": "Proposed Architecture for Sysops Squad",
+  "main": "index.js",
+  "scripts": {
+    "start": "node ./node_modules/c4builder/index.js site",
+    "buildStatic": "node ./node_modules/c4builder/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/architectonics/sysopssquad.git"
+  },
+  "author": "Archtectonics Team",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/architectonics/sysopssquad/issues"
+  },
+  "homepage": "https://github.com/architectonics/sysopssquad#readme",
+  "dependencies": {
+    "c4builder": "0.2.10",
+    "puppeteer": "^2.1.1"
+  }
+}

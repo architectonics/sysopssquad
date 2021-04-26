@@ -1,0 +1,8 @@
+{
+    "recommendations": [
+        "systemticks.c4-dsl-extension",
+        "nauvoms.color-highlight",
+        "dbaeumer.vscode-eslint",
+        "jebbs.plantuml"
+    ]
+}
