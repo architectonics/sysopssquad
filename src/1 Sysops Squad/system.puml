@@ -1,0 +1,41 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+Person(c, "Customer", "A customer of  Penultimate Electronics.")
+Person(a, "Administrator", "Creates and maintains Sysops squad expert team profiles.")
+Person(e, "Expert", "Works on problem tickets of Sysops squad.")
+Person(m, "Manager", "Generates Analytical reports of all sysops squad operations.")
+Person(cs, "Call Center", "Logs customer tickets.")
+
+
+System_Ext(ss, "Scheduling system", "The system that matches customer ticket to expert based on geography and availability")
+System_Ext(ma, "Mobile Application", "Used by experts for tracking tickets")
+System_Ext(wa, "Web Application", "User Interface used by customers and admins")
+System_Ext(cns, "Customer Notification System", "The system that communicates about expert whereabouts to customer")
+
+
+' System_Boundary(ibs, "Internet Banking") {
+'     Container(wa, "Web Application", "java and Spring MVC", "Delivers the static content and the internet banking single page application.")
+'     Container(spa, "Single Page Application", "javascript and angular", "Provides all the internet banking functionality to customers via their web browser.")
+'     Container(ma, "Mobile App", "Xamarin", "Provides a limited subset ot the internet banking functionality to customers via their mobile mobile device.")
+'     Container(db, "Database", "Relational Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.")
+'     Container(api, "API Application", "java and String MVC", "Provides internet banking functionality via a JSON/HTTP API.")
+
+'     Rel(c, es, "Sends e-mails", "SMTP")
+'     Rel(api, mbs, "Uses", "XML/HTTPS")
+'     Rel(api, db, "Reads & writes to", "JDBC")
+'     Rel(wa, spa, "Delivers")
+'     Rel(spa, api, "Uses", "JSON/HTTPS")
+'     Rel(ma, api, "Uses", "JSON/HTTPS")
+' }
+
+Rel(c, wa, "Creates a ticket")
+Rel(ss, e, "Matches a ticket")
+Rel(ss, ma, "sends ticket info to expert")
+Rel(cns, c, "sends text")
+Rel(e, ma, "marks ticket as complete")
+Rel(ss, c, "sends survey link")
+
+@enduml
