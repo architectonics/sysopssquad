@@ -1,0 +1,30 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+Person(customer, "Customer", "A customer of  Penultimate Electronics.")
+Person(admin, "Administrator", "Creates and maintains Sysops squad expert team profiles.")
+Person(expert, "Expert", "Works on problem tickets of Sysops squad.")
+Person(manager, "Manager", "Generates Analytical reports of all sysops squad operations.")
+Person(agent, "Call Center", "Logs customer tickets.")
+
+
+System(ss, "Scheduling system", "The system that matches customer ticket to expert based on geography and availability")
+System(ma, "Mobile Application", "Used by experts for tracking tickets")
+System(wa, "Web Application", "User Interface used by customers and admins")
+System(cns, "Customer Notification System", "The system that communicates about expert whereabouts to customer")
+
+
+Rel(customer, wa, "Creates a ticket")
+Rel(ss, expert, "Matches a ticket")
+Rel(ss, ma, "sends ticket info to expert")
+Rel(cns, customer, "sends text")
+Rel(expert, ma, "marks ticket as complete")
+Rel(ss, customer, "sends survey link")
+Rel(agent, wa, "logs support ticket")
+Rel(manager, wa, "generating analytical and operational reports")
+
+
+
+@enduml
