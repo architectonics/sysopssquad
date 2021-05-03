@@ -1,0 +1,20 @@
+@startuml "Sysops Web Application"
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+Person(customer, "Customer", "Customer of the Sysops Squad")
+
+Container_Boundary(spa, "Single Page Application") {
+    Component(root, "Root Microfrontend", "SPA Router", "Loads related microfrontends based on need.")
+    Component(login, "Login Microfrontend", "Microfrontend", "Handles user authentication and all routes starting with /auth")
+    Component(profile, "Profile Page", "Microfrontend", "Allows the user to view their account, billing ,and profile")
+}
+
+Rel(spa, api, "Uses", "JSON/HTTPS")
+
+Rel(login, store, "Uses");
+Rel(routing, store, "Uses");
+Rel(profile, store, "Uses");
+
+@enduml
