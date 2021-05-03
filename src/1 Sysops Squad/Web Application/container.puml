@@ -4,17 +4,43 @@
 LAYOUT_WITH_LEGEND()
 
 Person(customer, "Customer", "Customer of the Sysops Squad")
+Person(callcenter, "Call Center", "Call Center Staff taking customer calls")
+Person(administrator, "Administrator", "Administrator of the system")
 
-Container_Boundary(spa, "Single Page Application") {
-    Component(root, "Root Microfrontend", "SPA Router", "Loads related microfrontends based on need.")
-    Component(login, "Login Microfrontend", "Microfrontend", "Handles user authentication and all routes starting with /auth")
-    Component(profile, "Profile Page", "Microfrontend", "Allows the user to view their account, billing ,and profile")
+Container_Boundary(web, "Web Application"){
+
+    Container_Boundary(serverless, "Serverless Functions") {
+        Component(ticketing_api, "Ticketing API", "REST")
+        Component(survey_api, "Survey API", "REST")
+        Component(customer_api, "Customer API", "REST")
+        Component(reference_data_api, "Reference Data", "REST")
+    }
+
+    Container_Boundary(spa, "Web Browser Application") {
+        Component(root, "Root Microfrontend", "SPA Router", "Loads related microfrontends based on need.")
+        Component(login, "Login", "Microfrontend", "Handles user authentication and all routes starting with /auth")
+        Component(billing, "Billing", "Microfrontend", "Allows the user to view their account, billing ,and profile")
+        Component(ticketing, "Ticketing", "Microfrontend", "Allows the user to view their account, billing ,and profile")
+        Component(survey, "Surveys", "Microfrontend", "Allows the user to view their account, billing ,and profile")
+        Component(reference_data, "Reference Data", "Microfrontend", "Allows the administrator to update reference data (products, labels, etc.)")
+    }
+
 }
+Rel(customer, spa, "Logs into create tickets")
+Rel(callcenter, spa, "Creates tickets on behalf of customer")
 
-Rel(spa, api, "Uses", "JSON/HTTPS")
+Rel(root, login, "Loads")
+Rel(root, billing, "Loads")
+Rel(root, ticketing, "Loads")
+Rel(root, survey, "Loads")
+Rel(root, reference_data, "Loads")
 
-Rel(login, store, "Uses");
-Rel(routing, store, "Uses");
-Rel(profile, store, "Uses");
+Rel(ticketing, ticketing_api, "creates tickets", "JSON/HTTPS")
+Rel(survey, survey_api, "Calls", "JSON/HTTPS")
+Rel(billing, customer_api, "Calls", "JSON/HTTPS")
+Rel(login, customer_api, "Calls", "JSON/HTTPS")
+
+Rel(administrator, reference_data, "Manages", "WEB")
+Rel(reference_data, reference_data_api, "Loads and Persists", "JSON/HTTPS")
 
 @enduml
