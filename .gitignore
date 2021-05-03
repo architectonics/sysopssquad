@@ -1,4 +1,5 @@
-docs/*
+#TODO:  Figure out the build process to run this dynamically.
+#docs/*
 *.DS_Store
 
 node_modules/*
