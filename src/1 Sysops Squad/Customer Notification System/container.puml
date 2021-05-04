@@ -8,7 +8,7 @@ Person(customer, "Customer", "A customer of Penultimate Electronics.")
 Container(ss, "Scheduling System", "Lambda Function", "The system that matches customer ticket to expert based on geography and availability")
 Container_Boundary(cnp, "Customer Notification Process") {
     Component(notification, "Notification process", "Lambda Function", "Sends a text to customer informing expert is on their way")
-   }
+}
 
 Rel(cnp, customer, "sends", "Text Message")
 Rel(ss, cnp, "Uses")
