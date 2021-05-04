@@ -24,6 +24,4 @@ Rel(ss, sms, "Sends text")
 Rel(es, customer, "Sends email message")
 Rel(sms, customer, "Sends text message")
 
-
-
 @enduml

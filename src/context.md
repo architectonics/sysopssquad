@@ -1,12 +1,11 @@
-**Level 1: System Context diagram**
+**Sysops Squad Architecture**
+Add description of Sysops Context Diagram Here
 
-A System Context diagram is a good starting point for diagramming and documenting a software system, allowing you to step back and see the big picture. Draw a diagram showing your system as a box in the centre, surrounded by its users and the other systems that it interacts with.
+**C4 Diagrams** 
+Our team chose to try the [C4 Model](c4model.com) approach to diagrams.  This page has the context diagram, and the next diagrams are the container diagrams.  We expect to collaborate with the developers on the Component level diagrams as we get closer to implementation.
 
-Detail isn't important here as this is your zoomed out view showing a big picture of the system landscape. The focus should be on people (actors, roles, personas, etc) and software systems rather than technologies, protocols and other low-level details. It's the sort of diagram that you could show to non-technical people.
+**Architecture as Code**
+We decided to implement our diagrams as text files, enabling us to comment on individual lines in the pull requests and to collaborate better than if we were committing rendered images.
 
-**Scope**: A single software system.
-
-**Primary elements**: The software system in scope.
-Supporting elements: People (e.g. users, actors, roles, or personas) and software systems (external dependencies) that are directly connected to the software system in scope. Typically these other software systems sit outside the scope or boundary of your own software system, and you don’t have responsibility or ownership of them.
-
-**Intended audience**: Everybody, both technical and non-technical people, inside and outside of the software development team.
+**Contributing** 
+This is an active work in progress, and we'd encourage your input.  Please find the instructions on how to contribute [here](https://github.com/architectonics/sysopssquad/blob/main/contribute.md)..
