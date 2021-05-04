@@ -6,5 +6,4 @@
       * [Extended Docs](1%20Sysops%20Squad/Mobile%20App/Extended%20Docs/HOME)
     * [Scheduling System](1%20Sysops%20Squad/Scheduling%20System/HOME)
     * [Web Application](1%20Sysops%20Squad/Web%20Application/HOME)
-  * [2 Deployment](2%20Deployment/HOME)
   * [Architecture Decision Records](Architecture%20Decision%20Records/HOME)
