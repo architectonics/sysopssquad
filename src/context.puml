@@ -21,7 +21,8 @@ Rel(manager, ss, "Tracks ticket, receives analytical and operational reports")
 Rel(admin, ss, "Manages Expert profiles, Customer billing and Reference data")
 Rel(ss, es, "Sends email")
 Rel(ss, sms, "Sends text")
-Rel(es, customer, "Sends email message")
-Rel(sms, customer, "Sends text message")
+Rel(es, customer, "Sends 'Expert on the way' email message")
+Rel(sms, customer, "Sends 'Expert on the way' text message")
+Rel(sms, expert, "Sends Assigned text message")
 
 @enduml

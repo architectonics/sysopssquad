@@ -9,20 +9,40 @@ Person(expert, "Expert", "Works on problem tickets of Sysops squad.")
 Person(manager, "Manager", "Generates Analytical reports of all sysops squad operations.")
 Person(agent, "Call Center", "Logs customer tickets.")
 
-System(ss, "Sysopssquad system", "Allows management of customer ticket")
-
 System_Ext(es, "E-mail System", "Internal Email System")
 System_Ext(sms, "SMS Texting System", "Internal SMS Text System")
 
-Rel(customer, ss, "Manages Profile, billing, create tickets and completes surveys")
-Rel(expert, ss, "Gets tickets assigned, search knowledge base and enter notes about repairs")
-Rel(agent, ss, "Manages ticket")
-Rel(manager, ss, "Tracks ticket, receives analytical and operational reports")
-Rel(admin, ss, "Manages Expert profiles, Customer billing and Reference data")
-Rel(ss, es, "Sends email")
-Rel(ss, sms, "Sends text")
-Rel(es, customer, "Sends email message")
-Rel(sms, customer, "Sends text message")
+System_Boundary(sys, "Sysops Squad System"){
+Container(ss, "Scheduling system", "The system that matches customer ticket to expert based on geography and availability")
+Container(ma, "Mobile Application", "Used by experts for tracking tickets")
+Container(wa, "Web Application", "User Interface used by customers and admins")
+Container(cns, "Customer Notification System", "The system that communicates about expert whereabouts to customer")
+Container(ms, "Messaging System", "The system that will manage events produced and consumed by all systems")
+Container(db, "Database", "Database to persist customer registration, expert info and tickets")
+Container(api, "API", "API to access DB")
+ 
+Rel(api, db, "Access DB")
+Rel(wa, api, "Access API")
+Rel(ss, api, "Access API")
+Rel(admin, wa, "Manages Expert profiles, Customer billing and Reference data")
+Rel(customer, wa, "Creates a ticket")
+Rel(ss, ss, "Matches a ticket")
+Rel(ss, ma, "sends ticket matched info")
+Rel(expert, ma, "marks ticket as complete")
+Rel(agent, wa, "logs support ticket")
+Rel(manager, wa, "generating analytical and operational reports")
+
+Rel(ss, ms, "Send messages")
+Rel(ms, cns, "Receive messages")
+
+Rel(cns, es, "Sends email")
+Rel(cns, sms, "Sends text")
+Rel(ss, ms, "Send Survey")
+Rel(es, customer, "Sends 'Expert on the way' email message")
+Rel(sms, customer, "Sends 'Expert on the way' text message")
+Rel(sms, expert, "Sends Assigned text message")
+
+}
 
 
 
