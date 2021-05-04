@@ -9,7 +9,7 @@ System(scs, "Scheduling System")
 
 Container_Boundary(api, "API"){
 
-    Component(expert, "Expert Service", "rest", "Returns experts with the related matching skills")
+    Component(expertsvc, "Expert Service", "rest", "Returns experts with the related matching skills")
     Component(ticketsvc, "Ticketing Service", "rest", "Assign the ticket to the expert identified")
     Component(kbsvc, "Customer Service", "rest", "Obtains customer email or text")
 
@@ -21,6 +21,8 @@ Container_Boundary(ma, "Mobile Application") {
     Component(ticketmod, "Ticketing Module", "Rest", "Retrives and update/completes the ticket")
     Component(kbmod, "Knowledge Base Module", "rest", "Searches, retrieves and adds to knowledge base")
     Component(sso, "Single Signon", "Security Services")
+
+    Rel(expert, ma, "Uses")
 }
 
 

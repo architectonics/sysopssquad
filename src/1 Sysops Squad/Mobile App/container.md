@@ -1,16 +1,7 @@
-**Level 3: Component diagram**
+# Mobile Application
 
-Next you can zoom in and decompose each container further to identify the major structural building blocks and their interactions.
+Once the ticket is assigned to an Expert by the Scheduling System, a text is sent out to the Expert regarding the ticket. The Expert can review the assigned ticket on the Mobile App.
 
-The Component diagram shows how a container is made up of a number of "components", what each of those components are, their responsibilities and the technology/implementation details.
+The Mobile App is broken down into four modules: Single Signon, Expert Module, Ticketing Module, Knowledge Base Module. Single Signon allows the Expert to login and caches the token for future login with a specified expiry time. Expert Module captures expert availability and location. Ticketing Module communicates the status of the ticket and captures all comments. Knowledge Base Module provides searches on the articles from the history and also allows to add new articles.
 
-**Scope**: A single container.
-
-**Primary elements**: Components within the container in scope.
-Supporting elements: Containers (within the software system in scope) plus people and software systems directly connected to the components.
-
-**Intended audience**: Software architects and developers.
-
-> Example of included local image
-
-![](2020-01-10-16-21-41.png)
+All these modules interact with the API gateway to read/write the data via respective APIs
