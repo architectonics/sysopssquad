@@ -22,3 +22,15 @@ There are a number of VS Code Extensions recommended in the [extensions.json](.v
 ## Contributions
 
 Please create a github fork of the repository, and submit any pull requests.  Because the images are just text files, using traditional git workflows works great for both major refactoring and minor enhancements to the images.
+
+## Steps before submitting your pull request
+
+The /docs folder is what is served on our [Github Pages](https://architectonics.github.io/sysopssquad/).  Please execute the following commands before submitting your PR:
+
+```shell
+node node_modules/c4builder/index.js 
+git add docs/
+git commit -m "<your commit message>"
+```
+
+Ideally, we'd configure a [C4 Builder Action](https://github.com/marketplace/actions/c4builder) to do all of this, and if you'd like to submit a PR to improve the build process, we'd welcome that!
