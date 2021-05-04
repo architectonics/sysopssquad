@@ -11,6 +11,9 @@ Person(agent, "Call Center", "Logs customer tickets.")
 
 System_Ext(es, "E-mail System", "Internal Email System")
 System_Ext(sms, "SMS Texting System", "Internal SMS Text System")
+System_Ext(cc, "Payment Gateway", "Third Party Credit Card Processor")
+System_Ext(srvy, "Survey System", "Third Party Survey System")
+
 
 System_Boundary(sys, "Sysops Squad System"){
 Container(ss, "Scheduling system", "The system that matches customer ticket to expert based on geography and availability")
@@ -20,8 +23,13 @@ Container(cns, "Customer Notification System", "The system that communicates abo
 Container(ms, "Messaging System", "The system that will manage events produced and consumed by all systems")
 Container(db, "Database", "Database to persist customer registration, expert info and tickets")
 Container(api, "API", "API to access DB")
- 
+Container(bill, "Billing System", "Billing System")
+
+
+Rel(ss, srvy, "Manage Survey")
 Rel(api, db, "Access DB")
+Rel(bill, api, "Access API")
+Rel(bill, cc, "Process Payments")
 Rel(wa, api, "Access API")
 Rel(ss, api, "Access API")
 Rel(admin, wa, "Manages Expert profiles, Customer billing and Reference data")

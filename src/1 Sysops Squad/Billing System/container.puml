@@ -4,18 +4,11 @@
 LAYOUT_WITH_LEGEND()
 
 
-
 System_Ext(payment, "Payment Gateway", "Charges Customer Credit cards")
 
-Container(ms, "Messaging System", "queuing system", "System that will track messages")
-Container(ma, "Mobile App", "SysOps", "Provides abulity to access tickets, search Knowledge base and Add to knowledge base")
-Container(api, "API", "Microservices", "Set of microservices to access tickets, expert profile, billing, knowledge base")
-Container(scs, "Scheduling System", "Processing System", "The system that matches customer ticket to expert based on geography and availability")
 
 Container_Boundary(api, "API"){
-
-    Component(ticketsys, "Ticketing Service", "rest", "Assign the ticket to the expert identified")
-    Component(customer, "Customer Service", "rest", "Obtains customer email or text")
+    Component(customer, "Customer Service", "rest", "Obtains customer contract and billing info")
 
 }
 
@@ -23,17 +16,11 @@ Container_Boundary(scs, "Billing System") {
     Component(biller, "Billing Service", "cron", "Returns experts with the related matching skills")
     Component(payer, "Payer Service", "rest", "Calls Payment gateway to process payments")
 
-    Rel(scheduler, ticketsys, "Uses")
-    Rel(scheduler, expert, "Get Experts with skills")
-    Rel(scheduler, ms, "Sends message to Cusomter and Expert")
+    Rel(biller, customer, "Obtains all customer contracts")
+    Rel(biller, payer, "Manages Payment processing")
     
 }
 
-Rel(ms, scheduler, "Ticket created")
-Rel(ms, surveyer, "Ticket completed")
-Rel(surveyer, surveyApp, "Generates a survey")
-Rel(surveyer, ms, "Send message to Customer")
-Rel(surveyer, customer, "Get Customer info")
-Rel(scheduler, customer, "Get Customer info")
+Rel(payer, payment, "Initiates Payment")
 
 @enduml

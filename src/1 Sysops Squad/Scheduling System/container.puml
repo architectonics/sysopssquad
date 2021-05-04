@@ -4,10 +4,6 @@
 LAYOUT_WITH_LEGEND()
 
 
-
-
-
-
 System_Ext(surveyApp, "Survey application", "Creates and captures the responses")
 
 Container(ms, "Messaging System", "queuing system", "System that will track messages")
@@ -24,8 +20,8 @@ Container_Boundary(api, "API"){
 }
 
 Container_Boundary(scs, "Scheduling System") {
-    Component(scheduler, "Scheduler Service", "consumer", "Returns experts with the related matching skills")
-    Component(surveyer, "Survey Service", "consumer", "Creates and Sends Survey link to the customer")
+    Component(scheduler, "Scheduler Module", "consumer", "Returns experts with the related matching skills")
+    Component(surveyer, "Survey Module", "consumer", "Creates and Sends Survey link to the customer")
 
     Rel(scheduler, ticketsys, "Uses")
     Rel(scheduler, expert, "Get Experts with skills")
@@ -33,6 +29,7 @@ Container_Boundary(scs, "Scheduling System") {
     
 }
 
+Rel(scheduler, ma, "Ticket created")
 Rel(ms, scheduler, "Ticket created")
 Rel(ms, surveyer, "Ticket completed")
 Rel(surveyer, surveyApp, "Generates a survey")
