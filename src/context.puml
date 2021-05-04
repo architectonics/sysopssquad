@@ -3,13 +3,25 @@
 
 LAYOUT_WITH_LEGEND()
 
-Person(pbc, "Personal Banking Customer", "A customer of the bank, with personal bank accounts.")
-System(ibs, "Internet Banking System", "Allows customers to view information about their bank accounts, and make payments.")
-System_Ext(es, "E-mail system", "The internal Microsoft Exchange e-mail system.")
-System_Ext(mbs, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
+Person(customer, "Customer", "A customer of  Penultimate Electronics.")
+Person(admin, "Administrator", "Creates and maintains Sysops squad expert team profiles.")
+Person(expert, "Expert", "Works on problem tickets of Sysops squad.")
+Person(manager, "Manager", "Generates Analytical reports of all sysops squad operations.")
+Person(agent, "Call Center", "Logs customer tickets.")
 
-Rel(pbc, ibs, "Uses")
-Rel(es, pbc, "Sends e-mails to")
-Rel(ibs, es, "Sends e-mails", "SMTP")
-Rel(ibs, mbs, "Uses")
+System(ss, "Sysopssquad system", "Allows management of customer ticket")
+
+System_Ext(es, "E-mail System", "Internal Email System")
+System_Ext(sms, "SMS Texting System", "Internal SMS Text System")
+
+Rel(customer, ss, "Manages Profile, billing, create tickets and completes surveys")
+Rel(expert, ss, "Gets tickets assigned, search knowledge base and enter notes about repairs")
+Rel(agent, ss, "Manages ticket")
+Rel(manager, ss, "Tracks ticket, receives analytical and operational reports")
+Rel(admin, ss, "Manages Expert profiles, Customer billing and Reference data")
+Rel(ss, es, "Sends email")
+Rel(ss, sms, "Sends text")
+Rel(es, customer, "Sends email message")
+Rel(sms, customer, "Sends text message")
+
 @enduml
