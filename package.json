@@ -18,7 +18,7 @@
   },
   "homepage": "https://github.com/architectonics/sysopssquad#readme",
   "dependencies": {
-    "c4builder": "0.2.10",
+    "c4builder": "^0.2.10",
     "puppeteer": "^2.1.1"
   }
 }
