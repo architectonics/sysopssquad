@@ -9,21 +9,20 @@ Person(expert, "Expert", "Works on problem tickets of Sysops squad.")
 Person(manager, "Manager", "Generates Analytical reports of all sysops squad operations.")
 Person(agent, "Call Center", "Logs customer tickets.")
 
+System(ss, "Sysopssquad system", "Allows management of customer ticket")
 
-System(ss, "Scheduling system", "The system that matches customer ticket to expert based on geography and availability")
-System(ma, "Mobile Application", "Used by experts for tracking tickets")
-System(wa, "Web Application", "User Interface used by customers and admins")
-System(cns, "Customer Notification System", "The system that communicates about expert whereabouts to customer")
+System_Ext(es, "E-mail System", "Internal Email System")
+System_Ext(sms, "SMS Texting System", "Internal SMS Text System")
 
-
-Rel(customer, wa, "Creates a ticket")
-Rel(ss, expert, "Matches a ticket")
-Rel(ss, ma, "sends ticket info to expert")
-Rel(cns, customer, "sends text")
-Rel(expert, ma, "marks ticket as complete")
-Rel(ss, customer, "sends survey link")
-Rel(agent, wa, "logs support ticket")
-Rel(manager, wa, "generating analytical and operational reports")
+Rel(customer, ss, "Manages Profile, billing, create tickets and completes surveys")
+Rel(expert, ss, "Gets tickets assigned, search knowledge base and enter notes about repairs")
+Rel(agent, ss, "Manages ticket")
+Rel(manager, ss, "Tracks ticket, receives analytical and operational reports")
+Rel(admin, ss, "Manages Expert profiles, Customer billing and Reference data")
+Rel(ss, es, "Sends email")
+Rel(ss, sms, "Sends text")
+Rel(es, customer, "Sends email message")
+Rel(sms, customer, "Sends text message")
 
 
 
