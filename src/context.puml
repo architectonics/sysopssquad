@@ -13,6 +13,7 @@ System(ss, "Sysopssquad system", "Allows management of customer ticket")
 
 System_Ext(es, "E-mail System", "Internal Email System")
 System_Ext(sms, "SMS Texting System", "Internal SMS Text System")
+System_Ext(cc, "Credit Card Processor", "Third Party Credit Card Processor")
 
 Rel(customer, ss, "Manages Profile, billing, create tickets and completes surveys")
 Rel(expert, ss, "Gets tickets assigned, search knowledge base and enter notes about repairs")
@@ -23,5 +24,5 @@ Rel(ss, es, "Sends email")
 Rel(ss, sms, "Sends text")
 Rel(es, customer, "Sends email message")
 Rel(sms, customer, "Sends text message")
-
+Rel(ss, cc, "Processes Credit Cards")
 @enduml
