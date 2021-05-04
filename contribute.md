@@ -28,7 +28,7 @@ Please create a github fork of the repository, and submit any pull requests.  Be
 The /docs folder is what is served on our [Github Pages](https://architectonics.github.io/sysopssquad/).  Please execute the following commands before submitting your PR:
 
 ```shell
-node node_modules/c4builder/index.js 
+npm run buildStatic 
 git add docs/
 git commit -m "<your commit message>"
 ```
