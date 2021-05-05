@@ -24,10 +24,13 @@ Container(ms, "Messaging System", "The system that will manage events produced a
 Container(db, "Database", "Database to persist customer registration, expert info and tickets")
 Container(api, "API", "API to access DB")
 Container(bill, "Billing System", "Billing System")
+Container(report, "Reporting System", "Reporting System")
 
 
 Rel(ss, srvy, "Manage Survey")
 Rel(api, db, "Access DB")
+Rel(report, api, "Access API")
+Rel(ms, report, "Access API")
 Rel(bill, api, "Access API")
 Rel(bill, cc, "Process Payments")
 Rel(wa, api, "Access API")

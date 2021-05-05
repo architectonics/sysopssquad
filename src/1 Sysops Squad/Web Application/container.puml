@@ -7,6 +7,8 @@ Person(customer, "Customer", "Customer of the Sysops Squad")
 Person(callcenter, "Call Center", "Call Center Staff taking customer calls")
 Person(administrator, "Administrator", "Administrator of the system")
 
+Container(ms, "Messaging System", "Message management Application")
+
 Container_Boundary(web, "Web Application"){
 
     Container_Boundary(serverless, "Serverless Functions") {
@@ -23,6 +25,7 @@ Container_Boundary(web, "Web Application"){
         Component(ticketing, "Ticketing", "Microfrontend", "Allows the user to view their account, billing ,and profile")
         Component(survey, "Surveys", "Microfrontend", "Allows the user to view their account, billing ,and profile")
         Component(reference_data, "Reference Data", "Microfrontend", "Allows the administrator to update reference data (products, labels, etc.)")
+        Component(report_request, "Request Report", "technology")
     }
 
 }
@@ -40,7 +43,10 @@ Rel(survey, survey_api, "Calls", "JSON/HTTPS")
 Rel(billing, customer_api, "Calls", "JSON/HTTPS")
 Rel(login, customer_api, "Calls", "JSON/HTTPS")
 
+Rel(administrator, report_request, "Requests", "WEB")
 Rel(administrator, reference_data, "Manages", "WEB")
 Rel(reference_data, reference_data_api, "Loads and Persists", "JSON/HTTPS")
+
+Rel(report_request, ms, "Post request for report")
 
 @enduml

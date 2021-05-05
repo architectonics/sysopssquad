@@ -9,6 +9,7 @@ System_Ext(payment, "Payment Gateway", "Charges Customer Credit cards")
 
 Container_Boundary(api, "API"){
     Component(customer, "Customer Service", "rest", "Obtains customer contract and billing info")
+    Component(paymentapi, "Payment service", "Records the payment transaction")
 
 }
 
@@ -22,5 +23,6 @@ Container_Boundary(scs, "Billing System") {
 }
 
 Rel(payer, payment, "Initiates Payment")
+Rel(payer, paymentapi,"Record transaction")
 
 @enduml
