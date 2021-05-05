@@ -5,7 +5,7 @@ LAYOUT_WITH_LEGEND()
 
 Person(expert, "Expert", "Expert of the Sysops Squad")
 Container(api, "API Application", "java and Spring MVC", "Delivers the static content and the internet banking single page application.")
-System(scs, "Scheduling System")
+System(scs, "Scheduling System", "Matches the experts to the tickets based on expertise, availability and location")
 
 Container_Boundary(api, "API"){
 
@@ -23,6 +23,11 @@ Container_Boundary(ma, "Mobile Application") {
     Component(sso, "Single Signon", "Security Services")
 
     Rel(expert, ma, "Uses")
+    Rel(expertmod, expertsvc, "Provides Expert location and avaialabilty")
+    Rel(ticketmod, ticketsvc, "Manages ticket status and comments")
+    Rel(kbmod, kbsvc, "Searches, Retrieves and Add new aricles")
+
+    Rel(scs, expertmod, "Loads the assiged ticket")
 }
 
 
