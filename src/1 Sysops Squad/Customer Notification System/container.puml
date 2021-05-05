@@ -4,13 +4,18 @@
 LAYOUT_WITH_LEGEND()
 
 Person(customer, "Customer", "A customer of Penultimate Electronics.")
+System_Ext(sms, "SMS Texting System")
+System_Ext(email, "Email System")
 
 Container(ss, "Scheduling System", "Lambda Function", "The system that matches customer ticket to expert based on geography and availability")
 Container_Boundary(cnp, "Customer Notification Process") {
     Component(notification, "Notification process", "Lambda Function", "Sends a text to customer informing expert is on their way")
 }
 
-Rel(cnp, customer, "sends", "Text Message")
+Rel(cnp, sms, "sends", "Text Message")
+Rel(cnp, email, "sends", "Email Message")
+Rel(sms, customer, "sends")
+Rel(email, customer, "sends")
 Rel(ss, cnp, "Uses")
 
 @enduml
