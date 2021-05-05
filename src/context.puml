@@ -13,16 +13,23 @@ System(ss, "Sysopssquad system", "Allows management of customer ticket")
 
 System_Ext(es, "E-mail System", "Internal Email System")
 System_Ext(sms, "SMS Texting System", "Internal SMS Text System")
-System_Ext(cc, "Credit Card Processor", "Third Party Credit Card Processor")
+System_Ext(cc, "Payment Gateway", "Third Party Credit Card Processor")
+System_Ext(srvy, "Survey System", "Third Party Survey System")
 
 Rel(customer, ss, "Manages Profile, billing, create tickets and completes surveys")
 Rel(expert, ss, "Gets tickets assigned, search knowledge base and enter notes about repairs")
 Rel(agent, ss, "Manages ticket")
 Rel(manager, ss, "Tracks ticket, receives analytical and operational reports")
 Rel(admin, ss, "Manages Expert profiles, Customer billing and Reference data")
-Rel(ss, es, "Sends email")
-Rel(ss, sms, "Sends text")
-Rel(es, customer, "Sends email message")
-Rel(sms, customer, "Sends text message")
+Rel(es, customer, "Sends 'Expert on the way' email message")
+Rel(sms, customer, "Sends 'Expert on the way' text message")
+Rel(sms, expert, "Sends Assigned text message")
+
 Rel(ss, cc, "Processes Credit Cards")
+Rel(ss, srvy, "Manage Surveys")
+Rel(srvy, customer, "Manage Surveys")
+Rel(ss, sms, "Manage sms")
+Rel(ss, es, "Manage Emails")
+
+
 @enduml

@@ -3,26 +3,38 @@
 
 LAYOUT_WITH_LEGEND()
 
-Container(spa, "Single Page Application", "javascript and react", "Provides all the internet banking functionality to customers via their web browser.")
-Container(ma, "Mobile App", "Xamarin", "Provides a limited subset ot the internet banking functionality to customers via their mobile mobile device.")
-Container(db, "Database", "Relational Database Schema", "Stores user registration information, hashed authentication credentials, access logs, etc.")
-System_Ext(mbs, "Mainframe Banking System", "Stores all of the core banking information about customers, accounts, transactions, etc.")
 
-Container_Boundary(api, "API Application") {
-    Component(sign, "Sign In Controller", "MVC Rest Controlle", "Allows users to sign in to the internet banking system")
-    Component(accounts, "Accounts Summary Controller", "MVC Rest Controlle", "Provides customers with a summory of their bank accounts")
-    Component(security, "Security Component", "Spring Bean", "Provides functionality related to singing in, changing passwords, etc.")
-    Component(mbsfacade, "Mainframe Banking System Facade", "Spring Bean", "A facade onto the mainframe banking system.")
+System_Ext(surveyApp, "Survey application", "Creates and captures the responses")
 
-    Rel(sign, security, "Uses")
-    Rel(accounts, mbsfacade, "Uses")
-    Rel(security, db, "Read & write to", "JDBC")
-    Rel(mbsfacade, mbs, "Uses", "XML/HTTPS")
+Container(ms, "Messaging System", "queuing system", "System that will track messages")
+Container(ma, "Mobile App", "SysOps", "Provides abulity to access tickets, search Knowledge base and Add to knowledge base")
+Container(api, "API", "Microservices", "Set of microservices to access tickets, expert profile, billing, knowledge base")
+Container(scs, "Scheduling System", "Processing System", "The system that matches customer ticket to expert based on geography and availability")
+
+Container_Boundary(api, "API"){
+
+    Component(expert, "Expert Service", "rest", "Returns experts with the related matching skills")
+    Component(ticketsys, "Ticketing Service", "rest", "Assign the ticket to the expert identified")
+    Component(customer, "Customer Service", "rest", "Obtains customer email or text")
+
 }
 
-Rel(spa, sign, "Uses", "JSON/HTTPS")
-Rel(spa, accounts, "Uses", "JSON/HTTPS")
+Container_Boundary(scs, "Scheduling System") {
+    Component(scheduler, "Scheduler Module", "consumer", "Returns experts with the related matching skills")
+    Component(surveyer, "Survey Module", "consumer", "Creates and Sends Survey link to the customer")
 
-Rel(ma, sign, "Uses", "JSON/HTTPS")
-Rel(ma, accounts, "Uses", "JSON/HTTPS")
+    Rel(scheduler, ticketsys, "Uses")
+    Rel(scheduler, expert, "Get Experts with skills")
+    Rel(scheduler, ms, "Sends message to Cusomter and Expert")
+    
+}
+
+Rel(scheduler, ma, "Ticket created")
+Rel(ms, scheduler, "Ticket created")
+Rel(ms, surveyer, "Ticket completed")
+Rel(surveyer, surveyApp, "Generates a survey")
+Rel(surveyer, ms, "Send message to Customer")
+Rel(surveyer, customer, "Get Customer info")
+Rel(scheduler, customer, "Get Customer info")
+
 @enduml

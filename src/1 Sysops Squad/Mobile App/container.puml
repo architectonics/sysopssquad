@@ -3,19 +3,32 @@
 
 LAYOUT_WITH_LEGEND()
 
+Person(expert, "Expert", "Expert of the Sysops Squad")
 Container(api, "API Application", "java and Spring MVC", "Delivers the static content and the internet banking single page application.")
+System(scs, "Scheduling System", "Matches the experts to the tickets based on expertise, availability and location")
 
-Container_Boundary(spa, "Single Page Application") {
-    Component(routing, "Routing", "React router", "Handler slient side routing")
-    Component(store, "Data Store", "Redux", "The central object holding the application state")
-    Component(login, "Login form", "React Class", "The login page")
-    Component(profile, "Profile Page", "React Class", "The page where the logged in user can view and edit his/her information")
+Container_Boundary(api, "API"){
+
+    Component(expertsvc, "Expert Service", "rest", "Returns experts with the related matching skills")
+    Component(ticketsvc, "Ticketing Service", "rest", "Assign the ticket to the expert identified")
+    Component(kbsvc, "Customer Service", "rest", "Obtains customer email or text")
+
 }
 
-Rel(spa, api, "Uses", "JSON/HTTPS")
 
-Rel(login, store, "Uses");
-Rel(routing, store, "Uses");
-Rel(profile, store, "Uses");
+Container_Boundary(ma, "Mobile Application") {
+    Component(expertmod, "Expert Module", "Rest", "Updates the Expert availability")
+    Component(ticketmod, "Ticketing Module", "Rest", "Retrives and update/completes the ticket")
+    Component(kbmod, "Knowledge Base Module", "rest", "Searches, retrieves and adds to knowledge base")
+    Component(sso, "Single Signon", "Security Services")
+
+    Rel(expert, ma, "Uses")
+    Rel(expertmod, expertsvc, "Provides Expert location and avaialabilty")
+    Rel(ticketmod, ticketsvc, "Manages ticket status and comments")
+    Rel(kbmod, kbsvc, "Searches, Retrieves and Add new aricles")
+
+    Rel(scs, expertmod, "Loads the assiged ticket")
+}
+
 
 @enduml

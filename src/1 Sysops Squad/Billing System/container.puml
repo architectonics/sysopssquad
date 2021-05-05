@@ -1,0 +1,28 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+
+System_Ext(payment, "Payment Gateway", "Charges Customer Credit cards")
+
+
+Container_Boundary(api, "API"){
+    Component(customer, "Customer Service", "rest", "Obtains customer contract and billing info")
+    Component(paymentapi, "Payment service", "Records the payment transaction")
+
+}
+
+Container_Boundary(scs, "Billing System") {
+    Component(biller, "Billing Service", "cron", "Returns experts with the related matching skills")
+    Component(payer, "Payer Service", "rest", "Calls Payment gateway to process payments")
+
+    Rel(biller, customer, "Obtains all customer contracts")
+    Rel(biller, payer, "Manages Payment processing")
+    
+}
+
+Rel(payer, payment, "Initiates Payment")
+Rel(payer, paymentapi,"Record transaction")
+
+@enduml

@@ -1,0 +1,28 @@
+@startuml
+!include https://raw.githubusercontent.com/adrianvlupu/C4-PlantUML/latest/C4_Component.puml
+
+LAYOUT_WITH_LEGEND()
+
+
+Component(ms, "Messaging System", "Messaging System which manages request for reports")
+
+Container_Boundary(api, "API"){
+    Component(customersvc, "Customer Service", "rest", "Obtains customer contract and billing info")
+    Component(expertsvc, "Export Service", "rest", "Obtains Expert info")
+    Component(ticketsvc, "Ticketing Service", "rest", "Obtains ticketing info")
+    Component(paymentsvc, "Payment Service", "rest", "Obtains payment info")
+}
+
+Container_Boundary(rs, "Reporting System") {
+    Component(reporter, "Reporting Service", "consumer", "Queries API and generates various reports")
+    Rel(reporter, customersvc, "Obtains customer info")
+    Rel(reporter, expertsvc, "Obtains Expert info")
+    Rel(reporter, ticketsvc, "Obtains Ticketing info")  
+    Rel(reporter, paymentsvc, "Obatins Payment info")
+
+}
+
+Rel(ms, rs, "Request posted for reports")
+Rel(rs, ms, "Report ready message posted")
+
+@enduml
